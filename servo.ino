@@ -2,9 +2,11 @@
 
 const int SERVO = 10;
 Servo servo;
+const int buttonPin = 2;
 
 void setup() {
-  Serial.begin(9600);
+  pinMode(buttonPin, INPUT);
+  // Serial.begin(9600);
   servo.attach(SERVO);
   servo.write(0);
   delay(1000);
@@ -25,24 +27,27 @@ void setup() {
 // }
 
 void loop() {
-  if (Serial.available()) {
-    char userInput = Serial.read();
+  int buttonInput = digitalRead(buttonPin);
+  if (buttonInput == 1) servo.write(150);
+  else servo.write(30);
+  // if (Serial.available()) {
+  //   char userInput = Serial.read();
 
-    switch (userInput) {
-      case '1':
-        servo.write(30);
-        delay(1000);
-        break;
-      case '2':
-        servo.write(90);
-        delay(1000);
-        break;
-      case '3':
-        servo.write(150);
-        delay(1000);
-        break;
-      default:
-        break;
-    }
-  }
+  //   switch (userInput) {
+  //     case '1':
+  //       servo.write(30);
+  //       delay(1000);
+  //       break;
+  //     case '2':
+  //       servo.write(90);
+  //       delay(1000);
+  //       break;
+  //     case '3':
+  //       servo.write(150);
+  //       delay(1000);
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // }
 }
